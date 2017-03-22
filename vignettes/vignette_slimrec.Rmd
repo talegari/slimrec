@@ -126,7 +126,7 @@ tune_slim(mat           = ft_small       # smallish 100 * 1000 matrix
 
 # Scalability
 
-If you intend to use SLIM method for large matrices( around >= 1e7 ratings), this package might be slow enough to be practically useful even in parallel mode. You might want to look at [biglasso](https://cran.r-project.org/web/packages/biglasso) and other implementations like JAVA based [librec](http://www.librec.net/).
+If you intend to use SLIM method for large matrices( around >= 1e7 ratings), this package might be slow enough to be practically useful even in parallel mode. You might want to look at [biglasso](https://cran.r-project.org/package=biglasso) and other implementations like JAVA based [librec](http://www.librec.net/).
 
 ```{r}
 # delete the temporary vignette directory
