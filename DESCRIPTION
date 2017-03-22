@@ -1,5 +1,5 @@
 Package: slimrec
-Title: Sparse Linear Method to Predict Ratings and Top-N Reccomendations
+Title: Sparse Linear Method to Predict Ratings and Top-N Recommendations
 Version: 0.1.0
 Authors@R: person("Srikanth", "KS", email = "sri.teach@gmail.com", role = c("aut", "cre"))
 Description: Sparse Linear Method(SLIM) predicts ratings and top-n
