@@ -66,7 +66,7 @@ temp <- slim(mat           = ft_implicit # input sparse ratings matrix
              , coeffMat    = TRUE        # helpful in 'predict'ing later
              , returnMat   = TRUE        # return matrices in memory
              , computeRMSE = TRUE        # RMSE over rated items
-             , nproc       = 4           # number of concurrent processes
+             , nproc       = 2L          # number of concurrent processes
              , progress    = TRUE        # show a progressbar
              , check       = TRUE        # do basic checks on input params
              , cleanup     = FALSE       # keep output matrices on disk
@@ -119,7 +119,7 @@ tune_slim(mat           = ft_small       # smallish 100 * 1000 matrix
           , nfold       = 5              # 5-fold CV
           #, seed                        # set seed automatically
           , directory   = td             # objects are kept and cleaned up by end
-          , nproc       = 4              # number of concurrent processes
+          , nproc       = 2L             # number of concurrent processes
           , progress    = TRUE           # show a progressbar
           )
 ```
@@ -127,3 +127,8 @@ tune_slim(mat           = ft_small       # smallish 100 * 1000 matrix
 # Scalability
 
 If you intend to use SLIM method for large matrices( around >= 1e7 ratings), this package might be slow enough to be practically useful even in parallel mode. You might want to look at [biglasso](https://cran.r-project.org/web/packages/biglasso) and other implementations like JAVA based [librec](http://www.librec.net/).
+
+```{r}
+# delete the temporary vignette directory
+unlink(td, recursive = TRUE)
+```
