@@ -138,16 +138,35 @@
 #' str(temp)
 #'
 #' \dontrun{
-#' require("slimrec")
-#' data(ft_small)
-#' temp <- slim(mat           = ft_small
-#'              , alpha       = 0.6
-#'              , nonNegCoeff = FALSE
-#'              , coeffMat    = TRUE
-#'              , returnMat   = TRUE
-#'              , computeRMSE = TRUE
-#'              , cleanup     = TRUE)
+#' temp <- slim(mat           = ft_implicit # input sparse ratings matrix
+#'              , alpha       = 0.5         # 0 for ridge, 1 for lasso
+#'              #, lambda                   # suggested not to set lambda
+#'              #, nlambda                  # using default nlambda = 100
+#'              , nonNegCoeff = TRUE        # better accuracy, lower interpretability
+#'              , directory   = td          # dir where output matrices are stored
+#'              , coeffMat    = TRUE        # helpful in 'predict'ing later
+#'              , returnMat   = TRUE        # return matrices in memory
+#'              , computeRMSE = TRUE        # RMSE over rated items
+#'              , nproc       = 2L          # number of concurrent processes
+#'              , progress    = TRUE        # show a progressbar
+#'              , check       = TRUE        # do basic checks on input params
+#'              , cleanup     = FALSE       # keep output matrices on disk
+#'              )
 #' str(temp)
+#' # output ratings matrix would be comparatively denser
+#' predMat <- temp[["ratingMat"]] != 0
+#' sum(predMat)/((dim(predMat)[1])*(dim(predMat)[2]))
+#' # recommend top 5 items for a user 10
+#' top_cols(temp[["ratingMat"]]
+#'          , row = 10
+#'          , k   = 5
+#'          )
+#' # if you intend to avoid recommending 10, 215 and 3
+#' top_cols(temp[["ratingMat"]]
+#'          , row = 10
+#'          , k   = 5
+#'          , ignore = c(10, 215, 3)
+#'          )
 #' }
 #'
 #' @export

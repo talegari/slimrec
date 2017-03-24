@@ -37,17 +37,35 @@ To find top-n recommendations of a ratings matrix given an item (or
 }
 \examples{
 \dontrun{
-require("slimrec")
-data(ft_small)
-dir.create(file.path(tempdir(), "slim_test2"))
-temp <- slim(ft_small
-             , returnMat = TRUE
-             , directory = file.path(tempdir(), "slim_test2")
+temp <- slim(mat           = ft_implicit # input sparse ratings matrix
+             , alpha       = 0.5         # 0 for ridge, 1 for lasso
+             #, lambda                   # suggested not to set lambda
+             #, nlambda                  # using default nlambda = 100
+             , nonNegCoeff = TRUE        # better accuracy, lower interpretability
+             , directory   = td          # dir where output matrices are stored
+             , coeffMat    = TRUE        # helpful in 'predict'ing later
+             , returnMat   = TRUE        # return matrices in memory
+             , computeRMSE = TRUE        # RMSE over rated items
+             , nproc       = 2L          # number of concurrent processes
+             , progress    = TRUE        # show a progressbar
+             , check       = TRUE        # do basic checks on input params
+             , cleanup     = FALSE       # keep output matrices on disk
              )
-unlink(file.path(tempdir(), "slim_test2"), recursive = TRUE)
-dim(temp[["ratingMat"]])
-top_cols(temp[["ratingMat"]], row = 53)
-top_cols(temp[["ratingMat"]], row = 53, ignore = c(5,6))
+str(temp)
+# output ratings matrix would be comparatively denser
+predMat <- temp[["ratingMat"]] != 0
+sum(predMat)/((dim(predMat)[1])*(dim(predMat)[2]))
+# recommend top 5 items for a user 10
+top_cols(temp[["ratingMat"]]
+         , row = 10
+         , k   = 5
+         )
+# if you intend to avoid recommending 10, 215 and 3
+top_cols(temp[["ratingMat"]]
+         , row = 10
+         , k   = 5
+         , ignore = c(10, 215, 3)
+         )
 }
 
 }
