@@ -6,8 +6,7 @@ Description: Sparse Linear Method(SLIM) predicts ratings and top-n
     recommendations suited for sparse implicit positive feedback systems. SLIM
     is decomposed into multiple elasticnet optimization problems which are solved
     in parallel over multiple cores. The package is based on "SLIM: Sparse Linear
-    Methods for Top-N Recommender Systems" by Xia Ning and George Karypis ( DOI:
-    10.1109/ICDM.2011.134 ).
+    Methods for Top-N Recommender Systems" by Xia Ning and George Karypis <doi:10.1109/ICDM.2011.134>.
 Depends:
     R (>= 3.3.3),
     stats (>= 3.3.3)
