@@ -1,2 +1,0 @@
--fixed cran incoming issue
-- note might relate to 'new submission'
